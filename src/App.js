@@ -1,25 +1,19 @@
 import logo from './logo.svg';
 import './App.css';
+import Form from "./pages/Form";
+import Success from "./pages/Success";
 
+import { useState } from "react";
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  const [data, setData] = useState({});
+  const [submitted, setSubmitted] = useState(false);
+
+  const handleChange = e => setData({ ...data, [e.target.name]: e.target.value });
+  const handleClick = e => {
+    e.preventDefault();
+    setSubmitted(true);
+  }
+  return submitted ? <Success /> : <Form data={data} handleChange={handleChange} handleClick={handleClick}/>
 }
 
 export default App;
